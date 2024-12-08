@@ -19,8 +19,8 @@ class _DesktopScreenState extends State<DesktopScreen> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
-    Text _text = const Text(
+    double width = MediaQuery.of(context).size.width;
+    Text text = const Text(
       'Sign in to your Walmart account',
       style: TextStyle(
           fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'BogleWeb'),
@@ -42,13 +42,12 @@ class _DesktopScreenState extends State<DesktopScreen> {
             focusColor: CupertinoColors.black,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
-            labelText: 'Email Addess',
+            labelText: 'Email Address',
             contentPadding: EdgeInsets.all(10)),
         validator: (ifemail) =>
             !EmailValidator.validate(ifemail!) ? 'Enter a valid email' : null);
 
     final button = ElevatedButton(
-      child: const Text('Continue'),
       style: ElevatedButton.styleFrom(
         elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
         shape: RoundedRectangleBorder(
@@ -68,14 +67,22 @@ class _DesktopScreenState extends State<DesktopScreen> {
           );
         }
       },
+      child: const Text('Continue'),
     );
 
-    Text _text1 = const Text(
+    Text text1 = const Text(
       "Don't have an account?",
       style: TextStyle(fontSize: 16),
     );
     final button1 = ElevatedButton(
       onPressed: () {},
+      style: ElevatedButton.styleFrom(
+          elevation: 0.0, backgroundColor: CupertinoColors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: const BorderSide(width: 1)),
+          minimumSize: const Size.fromHeight(50),
+          fixedSize: const Size(150, 30)),
       child: const Text(
         'Create account',
         style: TextStyle(
@@ -84,13 +91,6 @@ class _DesktopScreenState extends State<DesktopScreen> {
             fontSize: 15,
             color: CupertinoColors.black),
       ),
-      style: ElevatedButton.styleFrom(
-          elevation: 0.0, backgroundColor: CupertinoColors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-              side: const BorderSide(width: 1)),
-          minimumSize: const Size.fromHeight(50),
-          fixedSize: const Size(150, 30)),
     );
     return Column(children: [
       Padding(
@@ -110,23 +110,23 @@ class _DesktopScreenState extends State<DesktopScreen> {
         ),
       ),
       const SizedBox(height: 30),
-      _text,
+      text,
       const SizedBox(height: 10),
       Center(
         child: SizedBox(
-          width: _width / 3,
+          width: width / 3,
           child: Form(
+            key: formkey,
             child: Padding(
               padding: const EdgeInsets.only(
                   top: 20, bottom: 10, left: 20, right: 20),
               child: emailfield,
             ),
-            key: formkey,
           ),
         ),
       ),
       SizedBox(
-        width: _width / 3,
+        width: width / 3,
         child: Padding(
           padding:
               const EdgeInsets.only(top: 30, bottom: 10, left: 20, right: 20),
@@ -134,16 +134,16 @@ class _DesktopScreenState extends State<DesktopScreen> {
         ),
       ),
       SizedBox(
-        width: _width / 3,
+        width: width / 3,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 20, bottom: 10),
-            child: _text1,
+            child: text1,
           ),
         ),
       ),
       SizedBox(
-        width: _width / 3,
+        width: width / 3,
         child: Padding(
           padding:
               const EdgeInsets.only(top: 20, bottom: 10, left: 20, right: 20),

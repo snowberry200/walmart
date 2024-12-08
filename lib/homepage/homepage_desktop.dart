@@ -37,9 +37,9 @@ class DesktopHomepage extends StatelessWidget {
           const Text('Homepage'),
           const SizedBox(height: 20),
           ElevatedButton(
-            child: const Text('Sign out'),
             style: ElevatedButton.styleFrom(
-              elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
+              elevation: 0,
+              backgroundColor: const Color.fromARGB(255, 37, 98, 228),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
@@ -48,12 +48,16 @@ class DesktopHomepage extends StatelessWidget {
             ),
             onPressed: () async {
               await authClient.logOut();
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const Layout(),
-                  ),
-                  (route) => false);
+             (BuildContext context) {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const Layout(),
+                    ),
+                    (route) => false);
+              }
+              ;
             },
+            child: const Text('Sign out'),
           )
         ]);
   }

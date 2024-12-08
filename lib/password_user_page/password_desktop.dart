@@ -35,7 +35,7 @@ class _PasswordDesktopState extends State<PasswordDesktop> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     final checkmark = Checkbox(
       value: isChecked,
       onChanged: (value) => setState(() {
@@ -111,7 +111,7 @@ class _PasswordDesktopState extends State<PasswordDesktop> {
         backgroundColor: CupertinoColors.white,
         body: Center(
             child: SizedBox(
-                width: _width / 3,
+                width: width / 3,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -316,7 +316,7 @@ class _PasswordDesktopState extends State<PasswordDesktop> {
     if (await canLaunchUrl(url as Uri)) {
       await launchUrl(url as Uri);
     } else {
-      throw 'Couldnt launch url';
+      throw 'Couldn\'t launch url';
     }
   }
 }

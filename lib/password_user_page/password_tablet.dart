@@ -104,13 +104,13 @@ class _PasswordTabletState extends State<PasswordTablet> {
       style: TextStyle(
           fontSize: 18, fontWeight: FontWeight.w400, letterSpacing: 1.0),
     );
-    double _width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
         backgroundColor: CupertinoColors.white,
         body: Center(
             child: SizedBox(
-          width: _width / 1.8,
+          width: width / 1.8,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Padding(
@@ -259,12 +259,14 @@ class _PasswordTabletState extends State<PasswordTablet> {
                             isProgress = false;
                           });
                           if (user != null) {
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => HomePageLayout(
-                                          user: user,
-                                        )),
-                                (route) => false);
+                            (BuildContext context) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePageLayout(
+                                            user: user,
+                                          )),
+                                  (route) => false);
+                            };
                           }
                           //}
 
@@ -289,15 +291,16 @@ class _PasswordTabletState extends State<PasswordTablet> {
                               });
                         }
                       },
-                      child: const Text('Sign in'),
                       style: ElevatedButton.styleFrom(
-                        elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
+                        elevation: 0,
+                        backgroundColor: const Color.fromARGB(255, 37, 98, 228),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                         minimumSize: const Size.fromHeight(50),
                         fixedSize: const Size(150, 30),
                       ),
+                      child: const Text('Sign in'),
                     ),
             )
           ]),

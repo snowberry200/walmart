@@ -257,12 +257,14 @@ class _PasswordMobileState extends State<PasswordMobile> {
                           isProgress = false;
                         });
                         if (user != null) {
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => HomePageLayout(
-                                        user: user,
-                                      )),
-                              (route) => false);
+                          (BuildContext context) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => HomePageLayout(
+                                          user: user,
+                                        )),
+                                (route) => false);
+                          };
                         }
                         //}
 
@@ -285,15 +287,16 @@ class _PasswordMobileState extends State<PasswordMobile> {
                               }
                             });
                       },
-                      child: const Text('Sign in'),
                       style: ElevatedButton.styleFrom(
-                        elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
+                        elevation: 0,
+                        backgroundColor: const Color.fromARGB(255, 37, 98, 228),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                         minimumSize: const Size.fromHeight(50),
                         fixedSize: const Size(150, 30),
                       ),
+                      child: const Text('Sign in'),
                     ),
             ),
           )

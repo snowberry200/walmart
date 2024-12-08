@@ -5,8 +5,8 @@ class OthersInfos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
-    bool isSmallScreen = _width <= 670;
+    double width = MediaQuery.of(context).size.width;
+    bool isSmallScreen = width <= 670;
     // bool isMediumScreen = _width > 670 && _width < 1200;
     // bool isLargeScreen = _width > 1200;
     return isSmallScreen
