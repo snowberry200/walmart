@@ -1,10 +1,11 @@
 {
-    "cSpell.words": [
-        "emailfield",
-        "formkey",
-        "getinfo",
-        "ifemail",
-        "passw",
-        "Vissible"
-    ]
+  "cSpell.words": [
+    "emailfield",
+    "formkey",
+    "getinfo",
+    "ifemail",
+    "passw",
+    "Vissible"
+  ],
+  "cmake.sourceDirectory": "/Users/fiifi/Documents/flutter/walmart/windows"
 }

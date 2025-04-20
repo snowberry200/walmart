@@ -27,9 +27,11 @@ class _MobileScreenState extends State<MobileScreen> {
     );
 
     final emailfield = TextFormField(
+        selectionControls: CupertinoDesktopTextSelectionControls(),
+        // mouseCursor: MouseCursor.uncontrolled,
+        // clipBehavior: Clip.antiAlias,
         cursorColor: Colors.blue,
         enableIMEPersonalizedLearning: true,
-        selectionControls: CupertinoTextSelectionControls(),
         textCapitalization: TextCapitalization.none,
         enableInteractiveSelection: true,
         autofillHints: const [AutofillHints.email],
@@ -49,7 +51,8 @@ class _MobileScreenState extends State<MobileScreen> {
 
     final button = ElevatedButton(
       style: ElevatedButton.styleFrom(
-        elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 37, 98, 228),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -57,7 +60,7 @@ class _MobileScreenState extends State<MobileScreen> {
         fixedSize: const Size(150, 30),
       ),
       onPressed: () async {
-        if (formkey.currentState!.validate()) {
+        while (formkey.currentState!.validate()) {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => PasswordLayout(
@@ -66,8 +69,23 @@ class _MobileScreenState extends State<MobileScreen> {
             ),
           );
         }
+
+        // if (formkey.currentState!.validate()) {
+        //   Navigator.of(context).push(
+        //     MaterialPageRoute(
+        //       builder: (context) => PasswordLayout(
+        //         email: _email.text,
+        //       ),
+        //     ),
+        //   );
+        // }
       },
-      child: const Text('Continue'),
+      child: const Text('Continue',
+          style: TextStyle(
+              color: CupertinoDynamicColor.withBrightness(
+                  color: Colors.white,
+                  darkColor: Colors.red,
+                  debugLabel: String.fromEnvironment("maybeDeclared")))),
     );
 
     Text text1 = const Text(
@@ -77,7 +95,8 @@ class _MobileScreenState extends State<MobileScreen> {
     final button1 = ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-          elevation: 0.0, backgroundColor: CupertinoColors.white,
+          elevation: 0.0,
+          backgroundColor: CupertinoColors.white,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(width: 1)),
@@ -114,6 +133,7 @@ class _MobileScreenState extends State<MobileScreen> {
                         image: DecorationImage(
                             image: NetworkImage(
                                 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/1925px-Walmart_Spark.svg.png'),
+                            scale: 1.0,
                             fit: BoxFit.fill)),
                   ),
                 ),
@@ -150,15 +170,14 @@ class _MobileScreenState extends State<MobileScreen> {
                 color: Colors.grey,
                 thickness: 0.2,
               ),
-              BottomAppBar(
-                elevation: 0,
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      bottom: 20.0, left: 20, top: 0, right: 20),
-                  child: InkWell(
-                    onTap: () {},
-                    hoverColor: Colors.white,
-                    splashColor: Colors.white,
+              SizedBox(
+                height: 200,
+                child: BottomAppBar(
+                  color: Colors.transparent,
+                  elevation: 10,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        bottom: 0.0, left: 20, top: 0, right: 20),
                     child: const OthersInfos(),
                   ),
                 ),

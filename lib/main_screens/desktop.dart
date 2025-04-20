@@ -49,7 +49,8 @@ class _DesktopScreenState extends State<DesktopScreen> {
 
     final button = ElevatedButton(
       style: ElevatedButton.styleFrom(
-        elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 37, 98, 228),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -77,7 +78,8 @@ class _DesktopScreenState extends State<DesktopScreen> {
     final button1 = ElevatedButton(
       onPressed: () {},
       style: ElevatedButton.styleFrom(
-          elevation: 0.0, backgroundColor: CupertinoColors.white,
+          elevation: 0.0,
+          backgroundColor: CupertinoColors.white,
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
               side: const BorderSide(width: 1)),
@@ -104,8 +106,10 @@ class _DesktopScreenState extends State<DesktopScreen> {
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(20)),
               image: DecorationImage(
+                  filterQuality: FilterQuality.high,
                   image: NetworkImage(
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/1925px-Walmart_Spark.svg.png'),
+                      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/1925px-Walmart_Spark.svg.png',
+                      scale: 0.5),
                   fit: BoxFit.fill)),
         ),
       ),
@@ -150,18 +154,13 @@ class _DesktopScreenState extends State<DesktopScreen> {
           child: button1,
         ),
       ),
-      const SizedBox(height: 80),
+      Expanded(child: const SizedBox()),
       BottomAppBar(
         elevation: 0,
         child: Padding(
           padding:
               const EdgeInsets.only(bottom: 20.0, left: 10, top: 0, right: 10),
-          child: InkWell(
-            hoverColor: Colors.white,
-            splashColor: Colors.white,
-            onTap: () {},
-            child: const OthersInfos(),
-          ),
+          child: const OthersInfos(),
         ),
       ),
     ]);
