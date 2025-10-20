@@ -232,41 +232,41 @@ class _PasswordMobileState extends State<PasswordMobile> {
                     )
                   : ElevatedButton(
                       onPressed: () async {
-                        // if (formkey.currentState!.validate()) {
-                        setState(() {
-                          isProgress = true;
-                        });
-                        FutureBuilder(
-                            future: authClient.signIn(
-                                email: widget.callback,
-                                password: _password.text),
-                            builder: (context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                return const Text('All done');
-                              } else {
-                                return const CircularProgressIndicator(
-                                  color: Colors.red,
-                                );
-                              }
-                            });
+                        if (formkey.currentState!.validate()) {
+                          setState(() {
+                            isProgress = true;
+                          });
+                          FutureBuilder(
+                              future: authClient.signIn(
+                                  email: widget.callback,
+                                  password: _password.text),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  return const Text('All done');
+                                } else {
+                                  return const CircularProgressIndicator(
+                                    color: Colors.red,
+                                  );
+                                }
+                              });
 
-                        User? user = await authClient.signIn(
-                            email: widget.callback, password: _password.text);
-                        setState(() {
-                          isProgress = false;
-                        });
-                        if (user != null) {
-                          (BuildContext context) {
-                            Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => HomePageLayout(
-                                          user: user,
-                                        )),
-                                (route) => false);
-                          };
+                          User? user = await authClient.signIn(
+                              email: widget.callback, password: _password.text);
+                          setState(() {
+                            isProgress = false;
+                          });
+                          if (user != null) {
+                            (BuildContext context) {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePageLayout(
+                                            user: user,
+                                          )),
+                                  (route) => false);
+                            };
+                          }
                         }
-                        //}
 
                         FutureBuilder(
                             future: Database(
@@ -296,7 +296,10 @@ class _PasswordMobileState extends State<PasswordMobile> {
                         minimumSize: const Size.fromHeight(50),
                         fixedSize: const Size(150, 30),
                       ),
-                      child: const Text('Sign in'),
+                      child: const Text(
+                        'Sign in',
+                        style: TextStyle(color: CupertinoColors.white),
+                      ),
                     ),
             ),
           )
