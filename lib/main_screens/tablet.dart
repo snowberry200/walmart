@@ -2,8 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'others.dart';
-import '../password_user_page/password_layout.dart';
+import '../widget/others.dart';
+import '../layout/password_layout.dart';
 
 class TabletScreen extends StatefulWidget {
   const TabletScreen({Key? key}) : super(key: key);
@@ -23,7 +23,8 @@ class _TabletScreenState extends State<TabletScreen> {
   final button1 = ElevatedButton(
     onPressed: () {},
     style: ElevatedButton.styleFrom(
-        elevation: 0.0, backgroundColor: CupertinoColors.white,
+        elevation: 0.0,
+        backgroundColor: CupertinoColors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: const BorderSide(width: 1)),
@@ -69,7 +70,8 @@ class _TabletScreenState extends State<TabletScreen> {
 
     final button = ElevatedButton(
       style: ElevatedButton.styleFrom(
-        elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
+        elevation: 0,
+        backgroundColor: const Color.fromARGB(255, 37, 98, 228),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

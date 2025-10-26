@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:walmart/main_screens/email_text_field.dart';
-import 'package:walmart/main_screens/image_container.dart';
-import 'package:walmart/main_screens/sign_up_button.dart';
-import 'package:walmart/main_screens/submit_button.dart';
-
-import 'others.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:walmart/bloc/auth_bloc.dart';
+import 'package:walmart/bloc/auth_state.dart';
+import 'package:walmart/widget/form_widget.dart';
+import 'package:walmart/layout/password_layout.dart';
+import 'package:walmart/widget/image_container.dart';
+import '../widget/others.dart';
 
 class MobileScreen extends StatefulWidget {
   const MobileScreen({
@@ -17,9 +18,10 @@ class MobileScreen extends StatefulWidget {
 }
 
 class _MobileScreenState extends State<MobileScreen> {
-  final TextEditingController _email = TextEditingController();
+  final TextEditingController email = TextEditingController();
   ScrollController scrollcontroller = ScrollController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final bool isSignedIn = true;
   @override
   Widget build(BuildContext context) {
     Text text = const Text(
@@ -28,65 +30,96 @@ class _MobileScreenState extends State<MobileScreen> {
           fontSize: 20, fontWeight: FontWeight.bold, fontFamily: 'BogleWeb'),
     );
 
-    Text text1 = const Text(
-      "Don't have an account?",
-      style: TextStyle(fontSize: 16),
-    );
-    return Scaffold(
-        backgroundColor: CupertinoColors.white,
-        body: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 30,
-                  bottom: 30,
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        state is AuthError
+            ? ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                  backgroundColor: Colors.red,
                 ),
-                child: ImageContainer(),
-              ),
-              text,
-              const SizedBox(height: 10),
-              Center(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0.0, horizontal: 50),
-                  child: Form(
-                    key: formkey,
-                    child: Column(
-                      children: [
-                        EmailTextField(email: _email),
-                        const SizedBox(height: 20),
-                        SubmitButton(formkey: formkey, email: _email),
-                        const SizedBox(height: 20),
-                        text1,
-                        const SizedBox(height: 20),
-                        SignUpButton(),
-                      ],
+              )
+            : [
+                state is EmailContinueState
+                    ? [
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Proceeding to password entry'),
+                            backgroundColor: Colors.green,
+                          ),
+                        ),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PasswordLayout(
+                              email: state.email,
+                            ),
+                          ),
+                        )
+                      ]
+                    : state is SignedUpState
+                        ? AlertDialog(
+                            title: const Text('Account created'),
+                            content: const Text(
+                                'Your account has been created successfully. Please sign in.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          )
+                        : const SizedBox.shrink(),
+              ];
+      },
+      builder: (context, state) {
+        return Scaffold(
+            backgroundColor: CupertinoColors.white,
+            body: ScrollConfiguration(
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                      bottom: 40,
+                    ),
+                    child: ImageContainer(),
+                  ),
+                  text,
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0.0, horizontal: 50),
+                      child: FormWidget(),
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 60),
-              const Divider(
-                color: Colors.grey,
-                thickness: 0.2,
-              ),
-              SizedBox(
-                height: 200,
-                child: BottomAppBar(
-                  color: Colors.transparent,
-                  elevation: 10,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 0.0, left: 20, top: 0, right: 20),
-                    child: const OthersInfos(),
+                  const SizedBox(height: 60),
+                  const Divider(
+                    color: Colors.grey,
+                    thickness: 0.2,
                   ),
-                ),
+                  SizedBox(
+                    height: 220,
+                    child: BottomAppBar(
+                      color: Colors.transparent,
+                      elevation: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            bottom: 0.0, left: 20, top: 0.0, right: 20),
+                        child: const OthersInfos(),
+                      ),
+                    ),
+                  ),
+                ]),
               ),
-            ]),
-          ),
-        ));
+            ));
+      },
+    );
   }
 }

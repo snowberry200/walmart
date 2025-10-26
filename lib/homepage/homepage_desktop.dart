@@ -19,7 +19,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:walmart/main_screens/layout.dart';
+import 'package:walmart/layout/layout.dart';
 import '../widget/auth.dart';
 
 class DesktopHomepage extends StatelessWidget {
@@ -48,14 +48,13 @@ class DesktopHomepage extends StatelessWidget {
             ),
             onPressed: () async {
               await authClient.logOut();
-             (BuildContext context) {
+              (BuildContext context) {
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                       builder: (context) => const Layout(),
                     ),
                     (route) => false);
-              }
-              ;
+              };
             },
             child: const Text('Sign out'),
           )

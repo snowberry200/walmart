@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:walmart/main_screens/firebase_options.dart';
-import 'main_screens/layout.dart';
+import 'package:walmart/firebase_options.dart';
+import 'layout/layout.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

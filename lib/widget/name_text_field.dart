@@ -1,39 +1,36 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class EmailTextField extends StatelessWidget {
-  const EmailTextField({
-    Key? key,
-    required TextEditingController email,
-  })  : _email = email,
-        super(key: key);
+class NameTextField extends StatefulWidget {
+  const NameTextField({Key? key}) : super(key: key);
 
-  final TextEditingController _email;
+  @override
+  State<NameTextField> createState() => NameTextFieldState();
+}
+
+class NameTextFieldState extends State<NameTextField> {
+  final TextEditingController name = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
         selectionControls: CupertinoDesktopTextSelectionControls(),
-        // mouseCursor: MouseCursor.uncontrolled,
-        // clipBehavior: Clip.antiAlias,
         cursorColor: Colors.blue,
         enableIMEPersonalizedLearning: true,
-        textCapitalization: TextCapitalization.none,
+        textCapitalization: TextCapitalization.values[0],
         enableInteractiveSelection: true,
         autofillHints: const [AutofillHints.email],
-        controller: _email,
+        controller: name,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         keyboardType: TextInputType.emailAddress,
-        onSaved: (value) => _email.text = value!,
+        onSaved: (value) => name.text = value!,
         decoration: const InputDecoration(
             focusedBorder: OutlineInputBorder(),
             focusColor: CupertinoColors.black,
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(5))),
-            labelText: 'Email Address',
+            labelText: 'name',
             contentPadding: EdgeInsets.all(10)),
-        validator: (ifemail) =>
-            !EmailValidator.validate(ifemail!) ? 'Enter a valid email' : null);
+        validator: (value) => value!.isEmpty ? 'Enter your name' : null);
   }
 }

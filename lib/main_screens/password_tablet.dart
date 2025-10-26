@@ -5,7 +5,7 @@ import 'package:walmart/widget/database.dart';
 
 import '../homepage/homepage.dart';
 import '../widget/auth.dart';
-import '../main_screens/layout.dart';
+import '../layout/layout.dart';
 
 class PasswordTablet extends StatefulWidget {
   final String callback;
@@ -271,10 +271,9 @@ class _PasswordTabletState extends State<PasswordTablet> {
                           //}
 
                           FutureBuilder(
-                              future: Database(
-                                      username: widget.callback,
-                                      pass: _password.text)
-                                  .getinfo(),
+                              future: Database().getinfo(
+                                  username: widget.callback,
+                                  pass: _password.text),
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.done) {

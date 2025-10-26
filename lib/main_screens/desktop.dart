@@ -2,8 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'others.dart';
-import '../password_user_page/password_layout.dart';
+import '../widget/others.dart';
+import '../layout/password_layout.dart';
 
 class DesktopScreen extends StatefulWidget {
   const DesktopScreen({

@@ -6,7 +6,7 @@ import 'package:walmart/widget/database.dart';
 
 // import '../homepage/homepage.dart';
 import '../widget/auth.dart';
-import '../main_screens/layout.dart';
+import '../layout/layout.dart';
 
 class PasswordDesktop extends StatefulWidget {
   final String callback;
@@ -239,7 +239,9 @@ class _PasswordDesktopState extends State<PasswordDesktop> {
                             //:
                             ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            elevation: 0, backgroundColor: const Color.fromARGB(255, 37, 98, 228),
+                            elevation: 0,
+                            backgroundColor:
+                                const Color.fromARGB(255, 37, 98, 228),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -287,10 +289,9 @@ class _PasswordDesktopState extends State<PasswordDesktop> {
                               // }
 
                               FutureBuilder(
-                                  future: Database(
-                                          username: widget.callback,
-                                          pass: _password.text)
-                                      .getinfo(),
+                                  future: Database().getinfo(
+                                      username: widget.callback,
+                                      pass: _password.text),
                                   builder: (context, snapshot) {
                                     if (snapshot.connectionState ==
                                         ConnectionState.done) {
