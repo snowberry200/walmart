@@ -7,34 +7,65 @@ class Database {
 
   final firestore = FirebaseFirestore.instance;
 
+  // This should be for SIGN IN - checking if user exists
   Future<Map<String, dynamic>> getinfo(
-      {required String username, required dynamic pass}) async {
-    CollectionReference credential = firestore.collection('credential');
-    late Map<String, dynamic> data = {'user': username, 'password': pass};
-
+      {required String username, required String pass}) async {
     try {
-      await credential.add(data);
+      // Query to find user with matching email and password
+      final querySnapshot = await firestore
+          .collection('credential')
+          .where('user', isEqualTo: username)
+          .where('password', isEqualTo: pass)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        throw Exception('Invalid email or password');
+      }
+
+      // Return user data
+      final userData = querySnapshot.docs.first.data();
+      log('User found: $userData');
+      return userData;
     } catch (e) {
-      log(e.toString());
+      log('getinfo error: $e');
+      rethrow; // IMPORTANT: rethrow so Bloc can catch the error
     }
-    return data;
   }
 
-  Future<void> signUp(
-      {required String? name,
-      required String username,
-      required dynamic pass}) async {
-    CollectionReference credential = firestore.collection('credential');
-    late Map<String, dynamic> data = {
-      'name': name,
-      'user': username,
-      'password': pass
-    };
-
+  // This should be for SIGN UP - creating new user
+  Future<void> signUp({
+    required String? name,
+    required String username,
+    required String pass,
+  }) async {
     try {
-      await credential.add(data);
+      // First check if user already exists
+      final existingUser = await firestore
+          .collection('credential')
+          .where('user', isEqualTo: username)
+          .limit(1)
+          .get();
+
+      if (existingUser.docs.isNotEmpty) {
+        throw Exception('User with this email already exists');
+      }
+
+      // Create new user
+      final data = {
+        'name': name,
+        'user': username,
+        'password': pass,
+        'createdAt': FieldValue.serverTimestamp(),
+      };
+
+      // Add to Firestore and wait for completion
+      await firestore.collection('credential').add(data);
+
+      log('User created successfully: $username');
     } catch (e) {
-      log(e.toString());
+      log('signUp error: $e');
+      rethrow; // IMPORTANT: rethrow so Bloc can catch the error
     }
   }
 }

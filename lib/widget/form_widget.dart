@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:walmart/bloc/auth_bloc.dart' show AuthBloc;
+import 'package:walmart/bloc/auth_event.dart';
 import 'package:walmart/widget/email_text_field.dart';
 import 'package:walmart/widget/name_textfield.dart';
 import 'package:walmart/widget/password_field.dart';
@@ -15,7 +18,7 @@ class FormWidget extends StatefulWidget {
 class _FormWidgetState extends State<FormWidget> {
   final GlobalKey<FormState> formKey = GlobalKey();
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController? nameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool isSignedIn = true;
@@ -27,6 +30,24 @@ class _FormWidgetState extends State<FormWidget> {
     });
   }
 
+  void _handleSubmit(String value) {
+    if (formKey.currentState!.validate()) {
+      final email = emailController.text.trim();
+      final name = nameController.text.trim();
+      final password = passwordController.text.trim();
+
+      if (isSignedIn) {
+        // Login logic
+        context.read<AuthBloc>().add(EmailContinueEvent(email: email));
+      } else {
+        // Sign up logic
+        context
+            .read<AuthBloc>()
+            .add(SignUpEvent(email: email, name: name, password: password));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -34,7 +55,7 @@ class _FormWidgetState extends State<FormWidget> {
       child: Column(
         children: [
           EmailTextField(
-            controller: emailController, // Pass controller
+            controller: emailController,
           ),
           const SizedBox(height: 20),
           if (!isSignedIn) ...[
@@ -49,8 +70,9 @@ class _FormWidgetState extends State<FormWidget> {
           SubmitButton(
             formkey: formKey,
             emailController: emailController,
-            name: nameController?.text,
+            name: nameController.text,
             password: passwordController,
+            handleLogin: _handleSubmit,
           ),
           const SizedBox(height: 20),
           const Text(

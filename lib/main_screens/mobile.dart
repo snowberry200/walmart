@@ -21,7 +21,6 @@ class _MobileScreenState extends State<MobileScreen> {
   final TextEditingController email = TextEditingController();
   ScrollController scrollcontroller = ScrollController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  final bool isSignedIn = true;
   @override
   Widget build(BuildContext context) {
     Text text = const Text(
@@ -39,9 +38,7 @@ class _MobileScreenState extends State<MobileScreen> {
               backgroundColor: Colors.red,
             ),
           );
-        }
-
-        if (state is EmailContinueState) {
+        } else if (state is EmailContinueState) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Proceeding to password entry'),
@@ -51,21 +48,18 @@ class _MobileScreenState extends State<MobileScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PasswordLayout(
-                email: state.email,
-              ),
+              builder: (context) => PasswordLayout(email: state.email),
             ),
           );
-        }
-
-        if (state is SignedUpState) {
+        } else if (state is SignedUpState) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Account created successfully. Please sign in.'),
               backgroundColor: Colors.green,
+              duration: Duration(seconds: 4),
             ),
           );
-        }
+        } else if (state is AuthLoading) {}
       },
       builder: (context, state) {
         return Scaffold(

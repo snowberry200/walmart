@@ -18,7 +18,7 @@ class SignInEvent extends AuthEvent {
 class SignUpEvent extends AuthEvent {
   final String? name;
   final String email;
-  final dynamic password;
+  final String password;
 
   SignUpEvent(
       {required this.name, required this.password, required this.email});

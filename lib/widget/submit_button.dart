@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:walmart/bloc/auth_bloc.dart';
-import 'package:walmart/bloc/auth_event.dart';
+import 'package:walmart/widget/form_widget.dart';
 
 class SubmitButton extends StatefulWidget {
+  final Function(String) handleLogin;
   final GlobalKey<FormState> formkey;
   final TextEditingController emailController;
   final String? name;
-  final dynamic password;
+  final TextEditingController password;
 
   const SubmitButton({
     Key? key,
+    required this.handleLogin,
     required this.formkey,
     required this.emailController,
     required this.name,
@@ -19,36 +19,20 @@ class SubmitButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SubmitButton> createState() => _SubmitButtonState();
+  State<SubmitButton> createState() => SubmitButtonState();
 }
 
-class _SubmitButtonState extends State<SubmitButton> {
+class SubmitButtonState extends State<SubmitButton> {
+  final FormWidget formWidget = FormWidget();
   late TextEditingController emailController;
   late String? name;
-  late dynamic password;
+  late TextEditingController password;
   @override
   void initState() {
     super.initState();
     emailController = widget.emailController;
     name = widget.name;
     password = widget.password;
-  }
-
-  void _handleLogin() {
-    if (widget.formkey.currentState!.validate()) {
-      final email = emailController.text.trim();
-      final name = this.name;
-      final password = this.password;
-      if (email.isNotEmpty) {
-        if (mounted) {
-          context.read<AuthBloc>().add(EmailContinueEvent(email: email));
-        } else {
-          context
-              .read<AuthBloc>()
-              .add(SignUpEvent(email: email, name: name, password: password));
-        }
-      }
-    }
   }
 
   @override
@@ -64,7 +48,7 @@ class _SubmitButtonState extends State<SubmitButton> {
         fixedSize: const Size(150, 30),
       ),
       onPressed: () async {
-        _handleLogin();
+        widget.handleLogin('submit');
       },
       child: const Text(
         'Continue',

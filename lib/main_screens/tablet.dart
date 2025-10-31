@@ -3,10 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walmart/bloc/auth_bloc.dart';
 import 'package:walmart/bloc/auth_state.dart';
 import 'package:walmart/layout/password_layout.dart';
-import 'package:walmart/widget/email_text_field.dart';
 import 'package:walmart/widget/form_widget.dart';
-import 'package:walmart/widget/sign_up_button.dart';
-import 'package:walmart/widget/submit_button.dart';
 
 import '../widget/others.dart';
 
@@ -18,19 +15,7 @@ class TabletScreen extends StatefulWidget {
 }
 
 class TabletScreenState extends State<TabletScreen> {
-  // void swap() {
-  //   setState(() {
-  //     isSignedIn = !isSignedIn;
-  //   });
-  // }
-
-  final TextEditingController _email = TextEditingController();
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-
-  final Text _text1 = const Text(
-    "Don't have an account?",
-    style: TextStyle(fontSize: 16),
-  );
 
   @override
   Widget build(BuildContext context) {
