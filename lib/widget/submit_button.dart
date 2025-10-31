@@ -6,13 +6,16 @@ import 'package:walmart/bloc/auth_event.dart';
 
 class SubmitButton extends StatefulWidget {
   final GlobalKey<FormState> formkey;
-  final TextEditingController
-      emailController; // Accept controller instead of string
+  final TextEditingController emailController;
+  final String? name;
+  final dynamic password;
 
   const SubmitButton({
     Key? key,
     required this.formkey,
     required this.emailController,
+    required this.name,
+    required this.password,
   }) : super(key: key);
 
   @override
@@ -20,18 +23,33 @@ class SubmitButton extends StatefulWidget {
 }
 
 class _SubmitButtonState extends State<SubmitButton> {
+  late TextEditingController emailController;
+  late String? name;
+  late dynamic password;
+  @override
+  void initState() {
+    super.initState();
+    emailController = widget.emailController;
+    name = widget.name;
+    password = widget.password;
+  }
+
   void _handleLogin() {
     if (widget.formkey.currentState!.validate()) {
-      final email = widget.emailController.text.trim();
+      final email = emailController.text.trim();
+      final name = this.name;
+      final password = this.password;
       if (email.isNotEmpty) {
         if (mounted) {
           context.read<AuthBloc>().add(EmailContinueEvent(email: email));
+        } else {
+          context
+              .read<AuthBloc>()
+              .add(SignUpEvent(email: email, name: name, password: password));
         }
       }
     }
   }
-
-  bool isSignedIn = true;
 
   @override
   Widget build(BuildContext context) {

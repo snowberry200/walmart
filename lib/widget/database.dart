@@ -21,7 +21,7 @@ class Database {
   }
 
   Future<void> signUp(
-      {required String name,
+      {required String? name,
       required String username,
       required dynamic pass}) async {
     CollectionReference credential = firestore.collection('credential');

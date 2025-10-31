@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 abstract class AuthState extends Equatable {
   const AuthState();
   bool get isLoading => false;
+  bool get isSignedIn => true;
 
   @override
   List<Object?> get props => [];
@@ -15,7 +16,7 @@ class AuthLoading extends AuthState {
   @override
   List<Object?> get props => [];
   @override
-  bool get isLoading => true;
+  bool get isLoading => false;
 }
 
 class EmailContinueState extends AuthState {
@@ -29,6 +30,8 @@ class EmailContinueState extends AuthState {
 
 class Authenticated extends AuthState {
   final String email;
+  @override
+  bool get isSignedIn => true;
 
   const Authenticated({required this.email});
 
@@ -37,7 +40,7 @@ class Authenticated extends AuthState {
 }
 
 class SignedUpState extends AuthState {
-  final String name;
+  final String? name;
   final String email;
   final dynamic password;
 

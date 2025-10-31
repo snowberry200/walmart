@@ -32,47 +32,40 @@ class _MobileScreenState extends State<MobileScreen> {
 
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        state is AuthError
-            ? ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.red,
-                ),
-              )
-            : [
-                state is EmailContinueState
-                    ? [
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Proceeding to password entry'),
-                            backgroundColor: Colors.green,
-                          ),
-                        ),
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PasswordLayout(
-                              email: state.email,
-                            ),
-                          ),
-                        )
-                      ]
-                    : state is SignedUpState
-                        ? AlertDialog(
-                            title: const Text('Account created'),
-                            content: const Text(
-                                'Your account has been created successfully. Please sign in.'),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          )
-                        : const SizedBox.shrink(),
-              ];
+        if (state is AuthError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+
+        if (state is EmailContinueState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Proceeding to password entry'),
+              backgroundColor: Colors.green,
+            ),
+          );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PasswordLayout(
+                email: state.email,
+              ),
+            ),
+          );
+        }
+
+        if (state is SignedUpState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Account created successfully. Please sign in.'),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
       },
       builder: (context, state) {
         return Scaffold(
