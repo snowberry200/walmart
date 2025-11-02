@@ -4,6 +4,7 @@ import 'package:walmart/bloc/auth_bloc.dart';
 import 'package:walmart/bloc/auth_state.dart';
 import 'package:walmart/layout/password_layout.dart';
 import 'package:walmart/widget/form_widget.dart';
+import 'package:walmart/widget/validator.dart';
 
 import '../widget/others.dart';
 
@@ -28,37 +29,15 @@ class TabletScreenState extends State<TabletScreen> {
 
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
+        // Handle auth state messages
+        StatementValidator.validateAuthStates(context, state);
 
+        // Handle navigation
         if (state is EmailContinueState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Proceeding to password entry'),
-              backgroundColor: Colors.green,
-            ),
-          );
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PasswordLayout(
-                email: state.email,
-              ),
-            ),
-          );
-        }
-
-        if (state is SignedUpState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Account created successfully. Please sign in.'),
-              backgroundColor: Colors.green,
+              builder: (context) => PasswordLayout(email: state.email),
             ),
           );
         }
@@ -99,23 +78,15 @@ class TabletScreenState extends State<TabletScreen> {
                         ),
                       ),
                       Expanded(child: const SizedBox()),
-                      ScrollConfiguration(
-                        behavior: ScrollConfiguration.of(context)
-                            .copyWith(scrollbars: false),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: BottomAppBar(
-                            elevation: 0,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  bottom: 20.0, left: 10, top: 0, right: 10),
-                              child: InkWell(
-                                hoverColor: Colors.white,
-                                splashColor: Colors.white,
-                                onTap: () {},
-                                child: const OthersInfos(),
-                              ),
-                            ),
+                      BottomAppBar(
+                        elevation: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 20.0, left: 10, top: 0, right: 10),
+                          child: ListView(
+                            children: [
+                              const OthersInfos(),
+                            ],
                           ),
                         ),
                       ),

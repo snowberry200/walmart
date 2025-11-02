@@ -44,8 +44,6 @@ class _MobileScreenState extends State<MobileScreen> {
             ),
           );
         }
-
-        // Add other navigation logic as needed
       },
       builder: (context, state) {
         return Scaffold(
