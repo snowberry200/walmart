@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walmart/bloc/auth_bloc.dart';
 import 'package:walmart/bloc/auth_event.dart';
+import 'package:walmart/widget/image_container.dart';
 import 'package:walmart/widget/password_field.dart';
 import 'package:walmart/widget/auth.dart';
+import 'package:walmart/widget/validator.dart';
 import '../bloc/auth_state.dart';
 import '../layout/layout.dart';
 
@@ -20,12 +22,10 @@ class PasswordMobileForm extends StatefulWidget {
 }
 
 class _PasswordMobileFormState extends State<PasswordMobileForm> {
-  Widget signinButton(bool isLoading) {
+  Widget signinButton(AuthState state) {
     return Center(
-      child: isLoading
-          ? CircularProgressIndicator(
-              color: CupertinoColors.activeBlue,
-            )
+      child: state.isLoading == true
+          ? StatementValidator.showProgressiveBar()
           : ElevatedButton(
               onPressed: () {
                 _handleLogin();
@@ -92,24 +92,20 @@ class _PasswordMobileFormState extends State<PasswordMobileForm> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.red,
-            ),
-          );
+          StatementValidator.validateAuthStates(context, state);
         }
+
         if (state is Authenticated) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Welcome back, ${state.email}!'),
-              backgroundColor: Colors.green,
-            ),
-          );
+          StatementValidator.validateAuthStates(context, state);
         }
+        Future.delayed(const Duration(seconds: 2), () {
+          if (context.mounted) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Layout()));
+          }
+        });
       },
       builder: (context, state) {
-        final isLoading = state.isLoading;
         return Scaffold(
             backgroundColor: CupertinoColors.white,
             body: Padding(
@@ -121,20 +117,7 @@ class _PasswordMobileFormState extends State<PasswordMobileForm> {
                       padding: const EdgeInsets.only(
                         top: 50,
                       ),
-                      child: Center(
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/1925px-Walmart_Spark.svg.png'),
-                                  fit: BoxFit.fill)),
-                        ),
-                      ),
+                      child: Center(child: ImageContainer()),
                     ),
                     const SizedBox(height: 40),
                     Center(
@@ -187,7 +170,7 @@ class _PasswordMobileFormState extends State<PasswordMobileForm> {
                               SizedBox(
                                 height: 20,
                               ),
-                              PasswordTextfield(),
+                              PasswordTextfield(key: passwordControllerKey),
                               SizedBox(
                                 height: 20,
                               ),
@@ -236,7 +219,7 @@ class _PasswordMobileFormState extends State<PasswordMobileForm> {
                                 height: 20,
                               ),
                               Center(
-                                child: signinButton(isLoading),
+                                child: signinButton(state),
                               )
                             ]))),
                   ]),

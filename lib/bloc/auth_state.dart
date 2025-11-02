@@ -16,7 +16,7 @@ class AuthLoading extends AuthState {
   @override
   List<Object?> get props => [];
   @override
-  bool get isLoading => false;
+  bool get isLoading => true;
 }
 
 class EmailContinueState extends AuthState {

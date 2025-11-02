@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:walmart/bloc/auth_state.dart';
 
@@ -52,9 +53,18 @@ class StatementValidator {
       showLoggedInStatement(context, 'Logged in successfully');
     }
     if (state is EmailContinueState) {
-      proceedToPassword(context, 'Proceeding to password entry');
+      proceedToPassword(context, 'Proceed to password entry');
     }
     return isValid;
+  }
+
+  static CircularProgressIndicator showProgressiveBar() {
+    return const CircularProgressIndicator(
+      strokeCap: StrokeCap.square,
+      backgroundColor: CupertinoColors.darkBackgroundGray,
+      valueColor: AlwaysStoppedAnimation<Color>(CupertinoColors.inactiveGray),
+      strokeWidth: 5.0,
+    );
   }
 
   static String? validateName({required String? name}) {

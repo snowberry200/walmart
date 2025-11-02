@@ -30,6 +30,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onSignInEvent(
       SignInEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
+    await Future.delayed(const Duration(seconds: 5));
+
     try {
       await database.getinfo(username: event.email, pass: event.password);
       emit(Authenticated(email: event.email));
@@ -41,6 +43,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onSignUpEvent(
       SignUpEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
+    await Future.delayed(const Duration(seconds: 5));
+
     try {
       await database.signUp(
           name: event.name, username: event.email, pass: event.password);
