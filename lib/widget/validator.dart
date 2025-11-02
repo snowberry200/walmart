@@ -1,37 +1,60 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:walmart/bloc/auth_state.dart';
 
 class StatementValidator {
   StatementValidator._();
 
-  static dynamic showLoggedInnStatement(BuildContext context, String message) {
+  static void showSnackBar(
+      {required BuildContext context,
+      required String message,
+      required Color color}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.green,
+        backgroundColor: color,
         duration: const Duration(seconds: 4),
       ),
     );
   }
 
-  static dynamic showSignUpMessage(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.lightBlue,
-        duration: const Duration(seconds: 4),
-      ),
-    );
+  static void showLoggedInStatement(BuildContext context, String message) {
+    showSnackBar(context: context, message: message, color: Colors.green);
   }
 
-  static dynamic authValidateMessage(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: CupertinoColors.activeBlue,
-        duration: const Duration(seconds: 4),
-      ),
-    );
+  static void showSignUpMessage(BuildContext context, String message) {
+    showSnackBar(color: Colors.green, context: context, message: message);
+  }
+
+  static void authValidateErrorMessage(BuildContext context, String message) {
+    showSnackBar(color: Colors.red, context: context, message: message);
+  }
+
+  static void proceedToPassword(BuildContext context, String message) {
+    showSnackBar(color: Colors.green, context: context, message: message);
+  }
+
+// validate States
+  static bool validateAuthStates(
+    BuildContext context,
+    AuthState? state,
+  ) {
+    bool isValid = true;
+
+    if (state is AuthError) {
+      authValidateErrorMessage(context, state.message);
+      isValid = false;
+    }
+    if (state is SignedUpState) {
+      showSignUpMessage(
+          context, 'Account created successfully. Please sign in.');
+    }
+    if (state is Authenticated) {
+      showLoggedInStatement(context, 'Logged in successfully');
+    }
+    if (state is EmailContinueState) {
+      proceedToPassword(context, 'Proceeding to password entry');
+    }
+    return isValid;
   }
 
   static String? validateName({required String? name}) {

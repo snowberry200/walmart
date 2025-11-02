@@ -6,6 +6,7 @@ import 'package:walmart/bloc/auth_state.dart';
 import 'package:walmart/widget/form_widget.dart';
 import 'package:walmart/layout/password_layout.dart';
 import 'package:walmart/widget/image_container.dart';
+import 'package:walmart/widget/validator.dart';
 import '../widget/others.dart';
 
 class MobileScreen extends StatefulWidget {
@@ -31,35 +32,19 @@ class _MobileScreenState extends State<MobileScreen> {
 
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.red,
-            ),
-          );
-        } else if (state is EmailContinueState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Proceeding to password entry'),
-              backgroundColor: Colors.green,
-            ),
-          );
+        // Handle auth state messages
+        StatementValidator.validateAuthStates(context, state);
+
+        // Handle navigation
+        if (state is EmailContinueState) {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => PasswordLayout(email: state.email),
             ),
           );
-        } else if (state is SignedUpState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Account created successfully. Please sign in.'),
-              backgroundColor: Colors.green,
-              duration: Duration(seconds: 4),
-            ),
-          );
-        } else if (state is AuthLoading) {}
+        }
+        // Add other navigation logic as needed
       },
       builder: (context, state) {
         return Scaffold(

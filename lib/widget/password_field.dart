@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:walmart/widget/validator.dart';
 
 class PasswordTextfield extends StatefulWidget {
   const PasswordTextfield({Key? key}) : super(key: key);
@@ -31,10 +32,7 @@ class PasswordTextfieldState extends State<PasswordTextfield> {
         ),
       ),
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter your password';
-        }
-        return null;
+        return StatementValidator.validatePassword(password: value);
       },
     );
   }

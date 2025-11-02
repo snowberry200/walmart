@@ -68,7 +68,7 @@ class TabletScreenState extends State<TabletScreen> {
           children: [
             Expanded(flex: 1, child: SizedBox()),
             Expanded(
-              flex: 5,
+              flex: 6,
               child: SizedBox(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -78,8 +78,8 @@ class TabletScreenState extends State<TabletScreen> {
                           top: 20,
                         ),
                         child: Container(
-                          width: width / 6,
-                          height: width / 6,
+                          width: width / 7,
+                          height: width / 7,
                           decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius:

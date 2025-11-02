@@ -1,43 +1,26 @@
 {
   "project_info": {
-    "project_number": "1078204483966",
-    "project_id": "wall-8e6be",
-    "storage_bucket": "wall-8e6be.appspot.com"
+    "project_number": "46371181115",
+    "project_id": "walmart-e0618",
+    "storage_bucket": "walmart-e0618.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1078204483966:android:b51e3df07793267cbbcb2f",
+        "mobilesdk_app_id": "1:46371181115:android:a93618b9a9482a328dc21e",
         "android_client_info": {
           "package_name": "com.enkasa.walmart"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "1078204483966-jr0s9njnkhett14u0jt2s6ue4n38c293.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAD4v88v5RWYXyFmVPX_1z5Yv2x4inu_EY"
+          "current_key": "AIzaSyC6xybV_IFKd9YGsv2DW28bQifuqQ64Ji8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1078204483966-jr0s9njnkhett14u0jt2s6ue4n38c293.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "1078204483966-jead69vvt9sl6gsci3rpmp31c92dcu8k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.enkasa.walmart"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

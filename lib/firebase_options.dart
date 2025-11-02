@@ -25,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -47,30 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCXo7WUWAOAPKbioB2TPo6soVPELddr61k',
-    appId: '1:1078204483966:web:d94f25a1552e9a76bbcb2f',
-    messagingSenderId: '1078204483966',
-    projectId: 'wall-8e6be',
-    authDomain: 'wall-8e6be.firebaseapp.com',
-    storageBucket: 'wall-8e6be.appspot.com',
-    measurementId: 'G-MVC2XZDZ6E',
+    apiKey: 'AIzaSyB1Pc-sS05o3r9K36z_h1fmfvTyOWMJ9YM',
+    appId: '1:46371181115:web:d1d58a22ca6edb9c8dc21e',
+    messagingSenderId: '46371181115',
+    projectId: 'walmart-e0618',
+    authDomain: 'walmart-e0618.firebaseapp.com',
+    storageBucket: 'walmart-e0618.firebasestorage.app',
+    measurementId: 'G-RNJQ4VP9J8',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAD4v88v5RWYXyFmVPX_1z5Yv2x4inu_EY',
-    appId: '1:1078204483966:android:b51e3df07793267cbbcb2f',
-    messagingSenderId: '1078204483966',
-    projectId: 'wall-8e6be',
-    storageBucket: 'wall-8e6be.appspot.com',
+    apiKey: 'AIzaSyC6xybV_IFKd9YGsv2DW28bQifuqQ64Ji8',
+    appId: '1:46371181115:android:a93618b9a9482a328dc21e',
+    messagingSenderId: '46371181115',
+    projectId: 'walmart-e0618',
+    storageBucket: 'walmart-e0618.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBQjgU2OhLSxNGB9ZN9mjTJtnZhhT00fiQ',
-    appId: '1:1078204483966:ios:811e3e00b00891fcbbcb2f',
-    messagingSenderId: '1078204483966',
-    projectId: 'wall-8e6be',
-    storageBucket: 'wall-8e6be.appspot.com',
-    iosClientId: '1078204483966-jead69vvt9sl6gsci3rpmp31c92dcu8k.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBTizLIb68y4FARrQkLLu73WT3x2nhSL0E',
+    appId: '1:46371181115:ios:a4b7a6db14723d938dc21e',
+    messagingSenderId: '46371181115',
+    projectId: 'walmart-e0618',
+    storageBucket: 'walmart-e0618.firebasestorage.app',
     iosBundleId: 'com.enkasa.walmart',
   );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBTizLIb68y4FARrQkLLu73WT3x2nhSL0E',
+    appId: '1:46371181115:ios:a4b7a6db14723d938dc21e',
+    messagingSenderId: '46371181115',
+    projectId: 'walmart-e0618',
+    storageBucket: 'walmart-e0618.firebasestorage.app',
+    iosBundleId: 'com.enkasa.walmart',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyB1Pc-sS05o3r9K36z_h1fmfvTyOWMJ9YM',
+    appId: '1:46371181115:web:0399ff874087cf288dc21e',
+    messagingSenderId: '46371181115',
+    projectId: 'walmart-e0618',
+    authDomain: 'walmart-e0618.firebaseapp.com',
+    storageBucket: 'walmart-e0618.firebasestorage.app',
+    measurementId: 'G-CV3YGPML64',
+  );
+
 }

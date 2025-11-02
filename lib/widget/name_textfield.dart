@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:walmart/widget/validator.dart';
 
 class NameTextFormWidget extends StatefulWidget {
@@ -28,9 +26,7 @@ class NameTextFormWidgetState extends State<NameTextFormWidget> {
   Widget build(BuildContext context) {
     return TextFormField(
       validator: (name) {
-        return StatementValidator.validateName(
-          name: widget.nameController!.text,
-        );
+        return StatementValidator.validateName(name: name);
       },
       textAlign: TextAlign.start,
       controller: widget.nameController,
