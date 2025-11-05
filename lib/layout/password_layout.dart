@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walmart/bloc/auth_bloc.dart';
-import 'package:walmart/widget/database.dart';
+import 'package:walmart/database/database.dart';
 
 import '../password_screens/password_desktop.dart';
 import '../password_screens/password_mobile_form.dart';

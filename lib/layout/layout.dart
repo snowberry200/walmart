@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walmart/bloc/auth_bloc.dart';
-import 'package:walmart/widget/database.dart';
+import 'package:walmart/database/database.dart';
 
 import '../main_screens/desktop.dart';
 import '../main_screens/mobile.dart';

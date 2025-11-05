@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:walmart/bloc/auth_event.dart';
 import 'package:walmart/bloc/auth_state.dart';
-import 'package:walmart/widget/database.dart';
+import 'package:walmart/database/database.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Database database;

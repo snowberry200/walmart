@@ -51,6 +51,7 @@ class _PasswordMobileFormState extends State<PasswordMobileForm> {
     if (!formKey.currentState!.validate()) {
       return;
     }
+    print(passwordControllerKey.currentState!.passwordController.text.trim());
     context.read<AuthBloc>().add(SignInEvent(
         email: widget.callback,
         password: passwordControllerKey.currentState!.passwordController.text
