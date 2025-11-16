@@ -6,7 +6,7 @@ abstract class AuthState extends Equatable {
   bool get isSignedIn => true;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [isLoading, isSignedIn];
 }
 
 class AuthInitial extends AuthState {}
@@ -58,4 +58,16 @@ class AuthError extends AuthState {
 
   @override
   List<Object?> get props => [message];
+}
+
+class ChangedCheckboxState extends AuthState {
+  final bool isSignInMode;
+
+  const ChangedCheckboxState({required this.isSignInMode});
+
+  @override
+  bool get isSignedIn => isSignInMode;
+
+  @override
+  List<Object?> get props => [isSignInMode];
 }

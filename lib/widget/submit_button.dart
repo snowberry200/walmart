@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:walmart/widget/form_widget.dart';
 
 class SubmitButton extends StatefulWidget {
-  final Function(String) handleLogin;
+  final void Function() handleLogin;
   final GlobalKey<FormState> formkey;
   final TextEditingController emailController;
   final String? name;
@@ -48,7 +48,7 @@ class SubmitButtonState extends State<SubmitButton> {
         fixedSize: const Size(150, 30),
       ),
       onPressed: () async {
-        widget.handleLogin('submit');
+        widget.handleLogin();
       },
       child: const Text(
         'Continue',

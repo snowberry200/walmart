@@ -36,4 +36,7 @@ class EmailContinueEvent extends AuthEvent {
   List<Object?> get props => [email];
 }
 
-class ChangeEvent extends AuthEvent {}
+class ToggleFormModeEvent extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+}

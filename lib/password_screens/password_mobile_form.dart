@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walmart/bloc/auth_bloc.dart';
@@ -51,7 +52,9 @@ class _PasswordMobileFormState extends State<PasswordMobileForm> {
     if (!formKey.currentState!.validate()) {
       return;
     }
-    print(passwordControllerKey.currentState!.passwordController.text.trim());
+    if (kDebugMode) {
+      print(passwordControllerKey.currentState!.passwordController.text.trim());
+    }
     context.read<AuthBloc>().add(SignInEvent(
         email: widget.callback,
         password: passwordControllerKey.currentState!.passwordController.text

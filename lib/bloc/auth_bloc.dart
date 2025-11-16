@@ -10,7 +10,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInEvent>(_onSignInEvent);
     on<SignUpEvent>(_onSignUpEvent);
     on<EmailContinueEvent>(_onEmailContinueEvent);
-    on<ChangeEvent>(_onChangeEvent);
+    on<ToggleFormModeEvent>(_onToggleFormModeEvent);
   }
   Future<void> _onEmailContinueEvent(
       EmailContinueEvent event, Emitter<AuthState> emit) async {
@@ -22,9 +22,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onChangeEvent(
-      ChangeEvent event, Emitter<AuthState> emit) async {
-    emit(AuthInitial());
+//toggle
+  Future<void> _onToggleFormModeEvent(
+      ToggleFormModeEvent event, Emitter<AuthState> emit) async {
+    emit(ChangedCheckboxState(isSignInMode: !state.isSignedIn));
   }
 
   Future<void> _onSignInEvent(
