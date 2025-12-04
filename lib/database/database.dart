@@ -33,38 +33,6 @@ class Database {
     }
   }
 
-  // Future<void> signUp({
-  //   required String? name,
-  //   required String username,
-  //   required String pass,
-  // }) async {
-  //   try {
-  //     log('🔍 Testing Firestore connection...');
-
-  //     // Test if we can write to Firestore
-  //     final testData = {
-  //       'test': 'connection',
-  //       'timestamp': FieldValue.serverTimestamp(),
-  //     };
-
-  //     await firestore.collection('test_connection').add(testData);
-  //     log('✅ Firestore connection test: SUCCESS');
-
-  //     // Continue with your actual signup logic...
-  //     final existingUser = await firestore
-  //         .collection('credential')
-  //         .where('user', isEqualTo: username)
-  //         .limit(1)
-  //         .get();
-
-  //     // ... rest of your signup code
-  //   } catch (e) {
-  //     log('❌ Firestore error: $e');
-  //     log('❌ This is likely a security rules issue!');
-  //     rethrow;
-  //   }
-  // }
-
   // This should be for SIGN UP - creating new user
   Future<void> signUp({
     required String? name,

@@ -32,15 +32,8 @@ class _PasswordLayoutState extends State<PasswordLayout> {
           return PasswordTablet(callback: widget.email);
         } else {
           return PasswordMobileForm(callback: widget.email);
-
-          //sending this callbackFunction to PasswordMobileForm()
         }
       }),
     );
-
-//  void parentChange(newString) {setState(() {
-//     email=newString;
-
-//   });}
   }
 }
