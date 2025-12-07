@@ -7,7 +7,7 @@ import 'package:walmart/widget/form_widget.dart';
 import 'package:walmart/layout/password_layout.dart';
 import 'package:walmart/widget/image_container.dart';
 import 'package:walmart/widget/validator.dart';
-import '../widget/others.dart';
+import '../../widget/others.dart';
 
 class MobileScreen extends StatefulWidget {
   const MobileScreen({

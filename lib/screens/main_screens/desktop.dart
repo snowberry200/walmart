@@ -5,8 +5,8 @@ import 'package:walmart/bloc/auth_state.dart'
     show AuthState, EmailContinueState;
 import 'package:walmart/widget/form_widget.dart';
 import 'package:walmart/widget/validator.dart';
-import '../widget/others.dart';
-import '../layout/password_layout.dart';
+import '../../widget/others.dart';
+import '../../layout/password_layout.dart';
 
 class DesktopScreen extends StatefulWidget {
   const DesktopScreen({

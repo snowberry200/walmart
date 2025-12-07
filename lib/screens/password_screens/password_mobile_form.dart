@@ -8,8 +8,8 @@ import 'package:walmart/widget/image_container.dart';
 import 'package:walmart/widget/password_field.dart';
 import 'package:walmart/widget/auth.dart';
 import 'package:walmart/widget/validator.dart';
-import '../bloc/auth_state.dart';
-import '../layout/layout.dart';
+import '../../bloc/auth_state.dart';
+import '../../layout/layout.dart';
 
 class PasswordMobileForm extends StatefulWidget {
   final String callback;

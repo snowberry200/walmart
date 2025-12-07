@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walmart/bloc/auth_bloc.dart';
 import 'package:walmart/database/database.dart';
 
-import '../password_screens/password_desktop.dart';
-import '../password_screens/password_mobile_form.dart';
-import '../password_screens/password_tablet.dart';
+import '../screens/password_screens/password_desktop.dart';
+import '../screens/password_screens/password_mobile_form.dart';
+import '../screens/password_screens/password_tablet.dart';
 
 class PasswordLayout extends StatefulWidget {
   final String email;

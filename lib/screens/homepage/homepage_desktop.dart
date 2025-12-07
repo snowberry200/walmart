@@ -20,7 +20,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:walmart/layout/layout.dart';
-import '../widget/auth.dart';
+import '../../widget/auth.dart';
 
 class DesktopHomepage extends StatelessWidget {
   final User? user;

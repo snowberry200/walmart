@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:walmart/bloc/auth_bloc.dart';
 import 'package:walmart/database/database.dart';
 
-import '../main_screens/desktop.dart';
-import '../main_screens/mobile.dart';
-import '../main_screens/tablet.dart';
+import '../screens/main_screens/desktop.dart';
+import '../screens/main_screens/mobile.dart';
+import '../screens/main_screens/tablet.dart';
 
 class Layout extends StatefulWidget {
   const Layout({Key? key}) : super(key: key);

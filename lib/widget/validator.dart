@@ -18,6 +18,7 @@ class StatementValidator {
     );
   }
 
+  // Auth Statements
   static void showLoggedInStatement(BuildContext context, String message) {
     showSnackBar(context: context, message: message, color: Colors.green);
   }
@@ -58,6 +59,7 @@ class StatementValidator {
     return isValid;
   }
 
+  //validate fields
   static CircularProgressIndicator showProgressiveBar() {
     return const CircularProgressIndicator(
       strokeCap: StrokeCap.square,

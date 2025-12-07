@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:walmart/password_screens/password_mobile_form.dart';
+import 'package:walmart/screens/password_screens/password_mobile_form.dart';
 
 class PasswordTablet extends StatefulWidget {
   final String callback;

@@ -6,7 +6,7 @@ import 'package:walmart/layout/password_layout.dart';
 import 'package:walmart/widget/form_widget.dart';
 import 'package:walmart/widget/validator.dart';
 
-import '../widget/others.dart';
+import '../../widget/others.dart';
 
 class TabletScreen extends StatefulWidget {
   const TabletScreen({Key? key}) : super(key: key);
